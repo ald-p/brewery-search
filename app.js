@@ -17,9 +17,9 @@ async function fetchData(endpoint = '') {
   return data;
 }
 
-function displayResults(input, results) {
+function displayResults(input, results, label = 'Search results for ') {
   // show label text
-  searchResultsLabel.innerText = `Search results for ${input}`;
+  searchResultsLabel.innerText = label + input;
 
   // clear current display
   breweryList.textContent = '';
@@ -60,6 +60,7 @@ function updateModalContent(brewery) {
   const link = document.createElement('a');
   link.setAttribute('href', brewery.website_url);
   link.setAttribute('target', '_blank');
+  link.classList.add('link-underline', 'link-underline-opacity-25');
   link.textContent = brewery.website_url;
   website.appendChild(link);
 
@@ -120,7 +121,17 @@ function breweryInfoHandler(e) {
   updateModalContent(brewery);
 }
 
+async function init() {
+  // Add event listeners
+  form.addEventListener('submit', searchHandler);
+  breweryList.addEventListener('click', breweryInfoHandler);
+
+  // fetch list of breweries
+  breweries = await fetchData('/random?size=15');
+
+  // display Results
+  displayResults('', breweries, 'Explore Breweries!');
+}
+
 /* Event listeners */
-form.addEventListener('submit', searchHandler);
-breweryList.addEventListener('click', breweryInfoHandler);
-// document.addEventListener('DOMContentLoaded')
+document.addEventListener('DOMContentLoaded', init);
