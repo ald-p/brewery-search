@@ -17,7 +17,7 @@
       <h1 class="fw-bold">brew-where-ry.</h1>
     </header>
     <div class="container mt-5">
-      <form>
+      <form id="search-form">
         <label for="brew-search" class="form-label fst-italic mb-3"
           >Enter keyword to search for a brewery</label
         >
@@ -26,22 +26,44 @@
           name="brew-search"
           id="brew-search"
           class="form-control mb-3"
+          placeholder="Enter search keyword"
         />
         <input type="submit" value="Search" class="btn btn-primary" />
       </form>
-      <div id="brewery-list-container" class="container mt-5">
-        <h3 class="text-center fw-lighter">Search results</h3>
-        <div id="brewery-list" class="list-group">
-          <a
-            href="#"
-            class="list-group-item list-group-item-action"
-            aria-current="true"
-          >
-            10 Barrel Brewing Co - San Diego, CA
-          </a>
-          <a href="#" class="list-group-item list-group-item-action"
-            >10 Barrel Brewing Co - Bend, OR</a
-          >
+      <div id="brewery-list-container" class="container mt-5 mb-5">
+        <h3 class="text-center fw-lighter" id="search-results-label"></h3>
+        <div id="brewery-list" class="list-group"></div>
+      </div>
+    </div>
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="breweryInfoModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="breweryInfoModalLabel"></h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body" id="breweryInfoModalBody"></div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
         </div>
       </div>
     </div>
