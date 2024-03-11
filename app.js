@@ -27,10 +27,7 @@ async function fetchData(endpoint = '') {
   return data;
 }
 
-function displayResults(input, results, label = 'Search results for ') {
-  // show label text
-  searchResultsLabel.innerText = label + input;
-
+function displayResults(results) {
   // clear current display
   breweryList.textContent = '';
 
@@ -194,7 +191,9 @@ async function searchHandler(e) {
   createPaginationElements();
 
   // display results
-  displayResults(searchText, breweries);
+  // show label text
+  searchResultsLabel.innerText = `Search results for ${searchText}`;
+  displayResults(breweries);
 
   displayPagination();
 
@@ -240,7 +239,7 @@ function paginationHandler(e) {
   }
 
   displayPagination();
-  displayResults('', breweries, 'Explore Breweries!');
+  displayResults(breweries);
 }
 
 async function init() {
@@ -259,7 +258,7 @@ async function init() {
   createPaginationElements();
 
   // display Results
-  displayResults('', breweries, 'Explore Breweries!');
+  displayResults(breweries);
 
   displayPagination();
 }
