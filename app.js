@@ -93,9 +93,30 @@ function formatPhoneNumber(num) {
   return num.replace(/\D+/g, '').replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
 }
 
+function showSpinner() {
+  const flexDiv = document.createElement('div');
+  flexDiv.classList.add('d-flex', 'justify-content-center');
+
+  const div = document.createElement('div');
+  div.classList.add('spinner-border');
+  div.setAttribute('role', 'status');
+
+  const span = document.createElement('span');
+  span.classList.add('visually-hidden');
+  span.textContent = 'Loading...';
+
+  flexDiv.appendChild(div);
+  div.appendChild(span);
+  breweryList.textContent = '';
+  breweryList.appendChild(flexDiv);
+}
+
 /* Event handlers */
 async function searchHandler(e) {
   e.preventDefault();
+
+  // show spinner
+  showSpinner();
 
   // get text input from user
   const searchText = form[0].value;
@@ -125,6 +146,9 @@ async function init() {
   // Add event listeners
   form.addEventListener('submit', searchHandler);
   breweryList.addEventListener('click', breweryInfoHandler);
+
+  // show spinner
+  showSpinner();
 
   // fetch list of breweries
   breweries = await fetchData('/random?size=15');
